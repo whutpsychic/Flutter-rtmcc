@@ -5,3 +5,4 @@ export "./pages/Dialogs/main.dart";
 export "./pages/ActionSheets/main.dart";
 export "./pages/ListItems/main.dart";
 export "./pages/SelectViews/main.dart";
+export "./pages/FormItems/main.dart";

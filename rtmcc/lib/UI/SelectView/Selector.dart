@@ -125,7 +125,7 @@ class Selector {
       builder: (ctx) => SelectorContainer(
         titles: titles,
         onChange: () {
-          onChange!(it, i);
+          if (onChange != null) onChange(it, i);
         },
         child: CupertinoPicker(
           itemExtent: itemHeight,
@@ -175,9 +175,11 @@ class Selector {
       builder: (ctx) => SelectorContainer(
         titles: titles,
         onChange: () {
-          List<Map> _result = [];
-          _result = result.map<Map>((e) => e[0]).toList();
-          onChange!(_result);
+          if (onChange != null) {
+            List<Map> _result = [];
+            _result = result.map<Map>((e) => e[0]).toList();
+            onChange(_result);
+          }
         },
         child: Row(
           children: data.map<Widget>(
@@ -230,8 +232,10 @@ class Selector {
       builder: (ctx) => SelectorContainer(
         titles: titles,
         onChange: () {
-          List<Map> vArr = _key.currentState!.getValueArr(_depth);
-          onChange!(vArr);
+          if (onChange != null) {
+            List<Map> vArr = _key.currentState!.getValueArr(_depth);
+            onChange(vArr);
+          }
         },
         child: LevelSelector(
           key: _key,
@@ -260,13 +264,13 @@ class Selector {
   }
 
   // 年份选择器
-  void showYear(Function? onChange, {int? defaultValue}) {
+  void showYear(Function? onChange, {DateTime? defaultValue}) {
     GlobalKey<YearPickerState> ak = GlobalKey();
     showCupertinoModalPopup(
       context: context,
       builder: (ctx) => SelectorContainer(
         onChange: () {
-          int v = ak.currentState?.getValue();
+          DateTime? v = ak.currentState?.getValue();
           if (onChange != null) onChange(v);
         },
         child: YearPicker(key: ak, defaultValue: defaultValue),
@@ -275,13 +279,13 @@ class Selector {
   }
 
   // 月份选择器
-  void showMonth(Function? onChange, {List<int>? defaultValue}) {
+  void showMonth(Function? onChange, {DateTime? defaultValue}) {
     GlobalKey<MonthPickerState> ak = GlobalKey();
     showCupertinoModalPopup(
       context: context,
       builder: (ctx) => SelectorContainer(
         onChange: () {
-          List<int> v = ak.currentState?.getValue();
+          DateTime? v = ak.currentState?.getValue();
           if (onChange != null) onChange(v);
         },
         child: MonthPicker(key: ak, defaultValue: defaultValue),
@@ -290,13 +294,13 @@ class Selector {
   }
 
   // 日期选择器
-  void showDate(Function? onChange, {List<int>? defaultValue}) {
+  void showDate(Function? onChange, {DateTime? defaultValue}) {
     GlobalKey<DatePickerState> ak = GlobalKey();
     showCupertinoModalPopup(
       context: context,
       builder: (ctx) => SelectorContainer(
         onChange: () {
-          List<int> v = ak.currentState?.getValue();
+          DateTime? v = ak.currentState?.getValue();
           if (onChange != null) onChange(v);
         },
         child: DatePicker(key: ak, defaultValue: defaultValue),
@@ -305,13 +309,13 @@ class Selector {
   }
 
   // 时分选择器
-  void showMinute(Function? onChange, {List<int>? defaultValue}) {
+  void showMinute(Function? onChange, {DateTime? defaultValue}) {
     GlobalKey<MinutePickerState> ak = GlobalKey();
     showCupertinoModalPopup(
       context: context,
       builder: (ctx) => SelectorContainer(
         onChange: () {
-          List<int> v = ak.currentState?.getValue();
+          DateTime? v = ak.currentState?.getValue();
           if (onChange != null) onChange(v);
         },
         child: MinutePicker(key: ak, defaultValue: defaultValue),

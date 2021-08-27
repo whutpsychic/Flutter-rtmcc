@@ -28,6 +28,7 @@ class _PageState extends State<AllMenu> with MyPage {
           MenuItem("操作表", "/actionsheets"),
           MenuItem("列表", "/list-items"),
           MenuItem("选择器视图", "/select-views"),
+          MenuItem("表单", "/form-items"),
         ],
       ),
     );

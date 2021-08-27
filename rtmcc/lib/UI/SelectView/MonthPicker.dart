@@ -7,7 +7,7 @@ import './main.dart';
 
 class MonthPicker extends StatefulWidget {
   final Key? key;
-  final List<int>? defaultValue;
+  final DateTime? defaultValue;
   MonthPicker({this.key, this.defaultValue}) : super(key: key);
 
   @override
@@ -48,8 +48,8 @@ class MonthPickerState extends State<MonthPicker> {
 
     // 默认数据
     if (widget.defaultValue != null) {
-      int _curyi = yresult.indexWhere((el) => el == widget.defaultValue![0]);
-      int _curmi = mresult.indexWhere((el) => el == widget.defaultValue![1]);
+      int _curyi = yresult.indexWhere((el) => el == widget.defaultValue!.year);
+      int _curmi = mresult.indexWhere((el) => el == widget.defaultValue!.month);
 
       setState(() {
         currYI = _curyi;
@@ -68,8 +68,8 @@ class MonthPickerState extends State<MonthPicker> {
     }
   }
 
-  getValue() {
-    return [years[currYI], months[currMI]];
+  DateTime getValue() {
+    return DateTime(years[currYI], months[currMI]);
   }
 
   @override

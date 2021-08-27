@@ -5,7 +5,7 @@ import './main.dart';
 
 class MinutePicker extends StatefulWidget {
   final Key? key;
-  final List<int>? defaultValue;
+  final DateTime? defaultValue;
   MinutePicker({this.key, this.defaultValue}) : super(key: key);
   @override
   State<StatefulWidget> createState() => MinutePickerState();
@@ -39,8 +39,8 @@ class MinutePickerState extends State<MinutePicker> {
 
     // 默认数据
     if (widget.defaultValue != null) {
-      int _curhi = harr.indexWhere((el) => el == widget.defaultValue![0]);
-      int _curmi = marr.indexWhere((el) => el == widget.defaultValue![1]);
+      int _curhi = harr.indexWhere((el) => el == widget.defaultValue!.hour);
+      int _curmi = marr.indexWhere((el) => el == widget.defaultValue!.minute);
 
       setState(() {
         currHI = _curhi;
@@ -61,8 +61,8 @@ class MinutePickerState extends State<MinutePicker> {
     });
   }
 
-  getValue() {
-    return [hours[currHI], minutes[currMI]];
+  DateTime getValue() {
+    return DateTime(0, 0, 0, hours[currHI], minutes[currMI]);
   }
 
   @override

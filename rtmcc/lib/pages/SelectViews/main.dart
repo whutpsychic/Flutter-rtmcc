@@ -20,10 +20,10 @@ class _PageState extends State<SelectViews> with MyPage {
   List<Map> selectItem3 = [];
   Map? selectItem4;
   // ====================
-  int? year;
-  List<int>? ym;
-  List<int>? ymd;
-  List<int>? hm;
+  DateTime? year;
+  DateTime? ym;
+  DateTime? ymd;
+  DateTime? hm;
   List? city;
 
   @override
@@ -71,25 +71,26 @@ class _PageState extends State<SelectViews> with MyPage {
                 ListItem(
                   title: "年份选择器",
                   onTap: _onPressYear,
-                  extra: ListItem.info(year != null ? "$year年" : ""),
+                  extra: ListItem.info(year != null ? "${year!.year}年" : ""),
                 ),
                 ListItem(
                   title: "月份选择器",
                   onTap: _onPressMonth,
-                  extra:
-                      ListItem.info(ym != null ? '${ym?[0]}年${ym?[1]}月' : ""),
+                  extra: ListItem.info(
+                      ym != null ? '${ym?.year}年${ym?.month}月' : ""),
                 ),
                 ListItem(
                   title: "日期选择器",
                   onTap: _onPressDate,
-                  extra: ListItem.info(
-                      ymd != null ? '${ymd?[0]}年${ymd?[1]}月${ymd?[2]}日' : ""),
+                  extra: ListItem.info(ymd != null
+                      ? '${ymd?.year}年${ymd?.month}月${ymd?.day}日'
+                      : ""),
                 ),
                 ListItem(
                   title: "时分选择器",
                   onTap: _onPressMinute,
                   extra: ListItem.info(hm != null
-                      ? '${excNumber(hm?[0])} : ${excNumber(hm?[1])}'
+                      ? '${excNumber(hm?.hour)} : ${excNumber(hm?.minute)}'
                       : ""),
                 ),
                 ListItem(

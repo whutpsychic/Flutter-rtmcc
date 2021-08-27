@@ -7,7 +7,7 @@ import './main.dart';
 
 class YearPicker extends StatefulWidget {
   final Key? key;
-  final int? defaultValue;
+  final DateTime? defaultValue;
   YearPicker({this.key, this.defaultValue}) : super(key: key);
 
   @override
@@ -36,7 +36,7 @@ class YearPickerState extends State<YearPicker> {
     int ei;
     // 如果有默认值
     if (widget.defaultValue != null) {
-      ei = result.indexWhere((element) => element == widget.defaultValue);
+      ei = result.indexWhere((element) => element == widget.defaultValue!.year);
     }
     // 默认选择今年
     else {
@@ -49,8 +49,8 @@ class YearPickerState extends State<YearPicker> {
     });
   }
 
-  getValue() {
-    return years[currI];
+  DateTime getValue() {
+    return DateTime(years[currI]);
   }
 
   @override

@@ -7,7 +7,7 @@ import './main.dart';
 
 class DatePicker extends StatefulWidget {
   final Key? key;
-  final List<int>? defaultValue;
+  final DateTime? defaultValue;
   DatePicker({this.key, this.defaultValue}) : super(key: key);
 
   @override
@@ -51,18 +51,25 @@ class DatePickerState extends State<DatePicker> {
     setState(() {
       years = yresult;
       months = mresult;
-      dc = FixedExtentScrollController(initialItem: currDI);
 
       // 默认数据
       if (widget.defaultValue != null) {
-        int _curyi = yresult.indexWhere((el) => el == widget.defaultValue![0]);
-        int _curmi = mresult.indexWhere((el) => el == widget.defaultValue![1]);
-        renderDates(yresult[_curyi], mresult[_curmi]);
+        int _curyi =
+            yresult.indexWhere((el) => el == widget.defaultValue!.year);
+        int _curmi =
+            mresult.indexWhere((el) => el == widget.defaultValue!.month);
+        List arr = renderDates(yresult[_curyi], mresult[_curmi], true);
         currYI = _curyi;
         currMI = _curmi;
+
+        // 日的默认值设定
+        int _curdi = arr.indexWhere((el) => el == widget.defaultValue!.day);
+        currDI = _curdi;
+        dc = FixedExtentScrollController(initialItem: _curdi);
       }
       // 默认为今年本月
       else {
+        dc = FixedExtentScrollController(initialItem: currDI);
         int _curyi = yresult.indexWhere((el) => el == _now.year);
         int _curmi = mresult.indexWhere((el) => el == _now.month);
         renderDates(yresult[_curyi], mresult[_curmi]);
@@ -72,12 +79,12 @@ class DatePickerState extends State<DatePicker> {
     });
   }
 
-  getValue() {
-    return [years[currYI], months[currMI], days[currDI]];
+  DateTime getValue() {
+    return DateTime(years[currYI], months[currMI], days[currDI]);
   }
 
   // 根据年月设定日期数据源和默认值
-  renderDates(int y, int m) {
+  List renderDates(int y, int m, [bool? init]) {
     int total;
 
     switch (m) {
@@ -137,15 +144,19 @@ class DatePickerState extends State<DatePicker> {
 
     setState(() {
       days = arr;
-      // fixed
-      if (currDI > arr.length - 1) {
-        currDI = arr.length - 1;
-        dc.jumpToItem(currDI);
+      if (init != null && init) {
       } else {
-        dc.jumpToItem(currDI - 1 < 0 ? 0 : currDI - 1);
-        dc.jumpToItem(currDI + 1);
+        // fixed
+        if (currDI > arr.length - 1) {
+          currDI = arr.length - 1;
+          dc.jumpToItem(currDI);
+        } else {
+          dc.jumpToItem(currDI - 1 < 0 ? 0 : currDI - 1);
+          dc.jumpToItem(currDI + 1);
+        }
       }
     });
+    return arr;
   }
 
   @override
