@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class MyScaffold extends StatefulWidget {
   final Widget child;
-  final String? title;
+  final dynamic title;
 
   MyScaffold({required this.child, this.title});
 
@@ -12,6 +12,17 @@ class MyScaffold extends StatefulWidget {
 }
 
 class MyScaffoldState extends State<MyScaffold> {
+  _renderTitle() {
+    if (widget.title != null) {
+      if (widget.title is String) {
+        return AppBar(title: Text(widget.title ?? ""));
+      } else if (widget.title is Widget) {
+        return AppBar(title: widget.title);
+      }
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     double _screenWidth = MediaQuery.of(context).size.width;
@@ -21,7 +32,7 @@ class MyScaffoldState extends State<MyScaffold> {
       // 点击app体可使键盘回收
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       child: Scaffold(
-        appBar: AppBar(title: Text(widget.title ?? "")),
+        appBar: _renderTitle(),
         body: Container(
           width: _screenWidth,
           height: _screenHeight,

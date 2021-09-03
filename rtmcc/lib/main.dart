@@ -44,6 +44,7 @@ class MyAppState extends State<MyApp> {
           '/list-items': (context) => ListItems(),
           '/select-views': (context) => SelectViews(),
           '/form-items': (context) => FormItems(),
+          '/examing': (context) => Examing(),
         },
       ),
     );

@@ -24,14 +24,10 @@ class _PageState extends State<Dialogs> with MyPage {
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
-            BlockButton(
-                filled: true, child: Text("警告对话框"), onPressed: _onPress),
-            BlockButton(
-                filled: true, child: Text("确定对话框"), onPressed: _onPress1),
-            BlockButton(
-                filled: true, child: Text("文字输入对话框"), onPressed: _onPress2),
-            BlockButton(
-                filled: true, child: Text("评价对话框"), onPressed: _onPress3),
+            BlockButton(child: Text("警告对话框"), onPressed: _onPress),
+            BlockButton(child: Text("确定对话框"), onPressed: _onPress1),
+            BlockButton(child: Text("文字输入对话框"), onPressed: _onPress2),
+            BlockButton(child: Text("评价对话框"), onPressed: _onPress3),
           ],
         ),
       ),

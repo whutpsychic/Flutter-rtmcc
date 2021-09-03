@@ -6,3 +6,4 @@ export "./pages/ActionSheets/main.dart";
 export "./pages/ListItems/main.dart";
 export "./pages/SelectViews/main.dart";
 export "./pages/FormItems/main.dart";
+export "./pages/Examing/main.dart";

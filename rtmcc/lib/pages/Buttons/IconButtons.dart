@@ -20,7 +20,6 @@ class _PageState extends State<IconButtons> {
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           child: Button(
             icon: Icon(Icons.search),
-            filled: true,
             size: Size(128, 36),
             child: Text('普通按钮1'),
             onPressed: () {
@@ -32,7 +31,6 @@ class _PageState extends State<IconButtons> {
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           child: Button(
             icon: Icon(Icons.flag),
-            filled: true,
             size: Size(128, 36),
             child: Text('普通按钮2'),
             onPressed: () {
@@ -44,6 +42,7 @@ class _PageState extends State<IconButtons> {
         Container(
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           child: Button(
+            outlined: true,
             icon: Icon(Icons.car_rental),
             size: Size(128, 36),
             child: Text('普通按钮3'),
@@ -55,6 +54,7 @@ class _PageState extends State<IconButtons> {
         Container(
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           child: Button(
+            outlined: true,
             icon: Icon(Icons.screen_lock_landscape),
             size: Size(128, 36),
             child: Text('普通按钮4'),

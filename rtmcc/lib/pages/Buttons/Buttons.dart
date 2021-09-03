@@ -20,7 +20,6 @@ class _PageState extends State<NormalButtons> {
         Container(
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           child: Button(
-            filled: true,
             size: Size(100, 36),
             child: Text('普通按钮1'),
             onPressed: () {
@@ -31,7 +30,6 @@ class _PageState extends State<NormalButtons> {
         Container(
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           child: Button(
-            filled: true,
             size: Size(100, 36),
             child: Text('普通按钮2'),
             onPressed: () {
@@ -43,7 +41,6 @@ class _PageState extends State<NormalButtons> {
         Container(
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           child: Button(
-            filled: true,
             size: Size(100, 36),
             child: Text('普通按钮3'),
             onPressed: () {
@@ -55,7 +52,6 @@ class _PageState extends State<NormalButtons> {
         Container(
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           child: Button(
-            filled: true,
             size: Size(100, 36),
             child: Text('普通按钮4'),
             onPressed: () {
@@ -67,7 +63,6 @@ class _PageState extends State<NormalButtons> {
         Container(
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           child: Button(
-            filled: true,
             size: Size(100, 36),
             child: Text(
               '普通按钮5',

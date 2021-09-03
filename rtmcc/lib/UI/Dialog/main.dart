@@ -9,6 +9,38 @@ class Dialog {
     return Dialog(context);
   }
 
+  void toast(String info) {
+    double _screenWidth = MediaQuery.of(context).size.width;
+    double _screenHeight = MediaQuery.of(context).size.height;
+
+    showCupertinoDialog(
+      context: context,
+      builder: (BuildContext ctx) {
+        return Container(
+          width: _screenWidth,
+          height: _screenHeight,
+          alignment: Alignment.center,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              info,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                decoration: TextDecoration.none,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   void alert(String title, String content, [Function? fun1]) {
     Function f1 = fun1 ?? () {};
     showCupertinoDialog(

@@ -8,7 +8,7 @@ class Button extends StatefulWidget {
 
   final Function? onLongPress;
   final Color? color;
-  final bool? filled;
+  final bool? outlined;
   final bool? loading;
   final Widget? icon;
 
@@ -18,7 +18,7 @@ class Button extends StatefulWidget {
     required this.size,
     this.onLongPress,
     this.color,
-    this.filled,
+    this.outlined,
     this.loading,
     this.icon,
   });
@@ -37,15 +37,40 @@ class Button extends StatefulWidget {
 class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
-    bool _filled = widget.filled != null && widget.filled!;
+    bool _outlined = widget.outlined != null && widget.outlined!;
     bool _loading = widget.loading != null && widget.loading!;
     bool _hasIcon = widget.icon != null;
     return Container(
       width: widget.size.width +
           (_loading ? Button.defaultIconSize + Button.defaultIconMargin : 0),
       height: widget.size.height,
-      child: _filled
-          ? ElevatedButton(
+      child: _outlined
+          ? OutlinedButton(
+              onPressed: _loading
+                  ? null
+                  : () {
+                      widget.onPressed();
+                    },
+              onLongPress: _loading
+                  ? null
+                  : () {
+                      widget.onLongPress!();
+                    },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _loading
+                      ? ButtonIconContainer(child: LoadingIcon())
+                      : Container(),
+                  _hasIcon
+                      ? ButtonIconContainer(child: widget.icon!)
+                      : Container(),
+                  widget.child
+                ],
+              ),
+              style: _getOutlinedStyle(widget.color),
+            )
+          : ElevatedButton(
               onPressed: _loading
                   ? null
                   : () {
@@ -74,31 +99,6 @@ class _ButtonState extends State<Button> {
                 overlayColor: MaterialStateProperty.resolveWith(
                     _getFilledStyle(widget.color)),
               ),
-            )
-          : OutlinedButton(
-              onPressed: _loading
-                  ? null
-                  : () {
-                      widget.onPressed();
-                    },
-              onLongPress: _loading
-                  ? null
-                  : () {
-                      widget.onLongPress!();
-                    },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _loading
-                      ? ButtonIconContainer(child: LoadingIcon())
-                      : Container(),
-                  _hasIcon
-                      ? ButtonIconContainer(child: widget.icon!)
-                      : Container(),
-                  widget.child
-                ],
-              ),
-              style: _getOutlinedStyle(widget.color),
             ),
     );
   }

@@ -46,6 +46,7 @@ class _PageState extends State<BlockButtons> {
         Container(
           margin: EdgeInsets.only(bottom: 0),
           child: BlockButton(
+            outlined: true,
             child: Text("块级按钮1"),
             onPressed: () {
               widget.onPress("块级按钮1");
@@ -55,6 +56,7 @@ class _PageState extends State<BlockButtons> {
         Container(
           margin: EdgeInsets.only(bottom: 0),
           child: BlockButton(
+            outlined: true,
             child: Text("块级按钮2"),
             onPressed: () {
               _fakeLoad1();
@@ -66,7 +68,6 @@ class _PageState extends State<BlockButtons> {
         Container(
           margin: EdgeInsets.only(bottom: 0),
           child: BlockButton(
-            filled: true,
             child: Text("块级按钮3"),
             onPressed: () {
               _fakeLoad2();
@@ -78,7 +79,6 @@ class _PageState extends State<BlockButtons> {
         Container(
           margin: EdgeInsets.only(bottom: 0),
           child: BlockButton(
-            filled: true,
             child: Text("块级按钮4"),
             onPressed: () {
               widget.onPress("块级按钮4");
@@ -89,7 +89,6 @@ class _PageState extends State<BlockButtons> {
         Container(
           margin: EdgeInsets.only(bottom: 0),
           child: BlockButton(
-            filled: true,
             child: Text("块级按钮5"),
             onPressed: () {
               widget.onPress("块级按钮5");
@@ -100,7 +99,6 @@ class _PageState extends State<BlockButtons> {
         Container(
           margin: EdgeInsets.only(bottom: 0),
           child: BlockButton(
-            filled: true,
             child: Text("块级按钮6"),
             onPressed: () {
               widget.onPress("块级按钮6");

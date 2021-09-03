@@ -20,10 +20,10 @@ GlobalKey<FormPicturePickerState> fimpk = GlobalKey();
 
 class FormItems extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => FormItemsState();
+  State<StatefulWidget> createState() => _PageState();
 }
 
-class FormItemsState extends State<FormItems> {
+class _PageState extends State<FormItems> {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
@@ -156,8 +156,7 @@ class FormItemsState extends State<FormItems> {
               // ============================================
               Container(
                 margin: EdgeInsets.only(top: 10),
-                child: BlockButton(
-                    filled: true, child: Text('Check'), onPressed: _onCheck),
+                child: BlockButton(child: Text('Check'), onPressed: _onCheck),
               )
             ],
           ),

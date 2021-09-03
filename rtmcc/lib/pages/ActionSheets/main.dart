@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../../core/MyPage/main.dart';
 import '../../UI/Button/main.dart';
+import '../../UI/ActionSheet/main.dart';
 
 class ActionSheets extends StatefulWidget {
   @override
@@ -23,58 +24,27 @@ class _PageState extends State<ActionSheets> with MyPage {
           padding: EdgeInsets.all(10),
           child: Column(
             children: [
-              BlockButton(
-                  filled: true, child: Text("弹出操作表"), onPressed: _onPress),
+              BlockButton(child: Text("弹出操作表"), onPressed: _onPress),
             ],
           ),
         ));
   }
 
+  _operate1() {
+    toast('您点击了操作1');
+  }
+
+  _operate2() {
+    toast('您点击了操作2');
+  }
+
+  _operate3() {
+    toast('您点击了操作3');
+  }
+
   _onPress() {
-    showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) => CupertinoActionSheet(
-        title: Text('请选择要进行的操作', style: TextStyle(fontSize: 16)),
-        // message: const Text('选项'),
-        actions: <CupertinoActionSheetAction>[
-          CupertinoActionSheetAction(
-            child: const Text('拍摄'),
-            onPressed: () {
-              Navigator.pop(context);
-              toast("拍摄");
-            },
-          ),
-          CupertinoActionSheetAction(
-            child: Text('选择照片'),
-            onPressed: () {
-              toast("选择照片");
-              Navigator.pop(context);
-            },
-          )
-        ],
-        cancelButton: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-            toast('取消');
-          },
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(18)),
-            child: Text(
-              '取消',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2,
-                color: Colors.blue,
-                decoration: TextDecoration.none,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+    ActionSheet.of(context).show(
+        items: ["操作1", "操作2", "操作3"],
+        actions: [_operate1, _operate2, _operate3]);
   }
 }

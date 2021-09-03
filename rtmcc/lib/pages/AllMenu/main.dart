@@ -19,16 +19,26 @@ class _PageState extends State<AllMenu> with MyPage {
   Widget build(BuildContext context) {
     return MyScaffold(
       title: "菜单",
-      child: ListGroup(
-        title: "通用组件",
+      child: Column(
         children: [
-          MenuItem("按钮", "/buttons"),
-          MenuItem("提示", "/toasts"),
-          MenuItem("对话框", "/dialogs"),
-          MenuItem("操作表", "/actionsheets"),
-          MenuItem("列表", "/list-items"),
-          MenuItem("选择器视图", "/select-views"),
-          MenuItem("表单", "/form-items"),
+          ListGroup(
+            title: "通用组件",
+            children: [
+              MenuItem("按钮", "/buttons"),
+              MenuItem("提示", "/toasts"),
+              MenuItem("对话框", "/dialogs"),
+              MenuItem("操作表", "/actionsheets"),
+              MenuItem("列表", "/list-items"),
+              MenuItem("选择器视图", "/select-views"),
+              MenuItem("表单", "/form-items"),
+            ],
+          ),
+          ListGroup(
+            title: "考试答题组件",
+            children: [
+              MenuItem("模拟考试", "/examing"),
+            ],
+          ),
         ],
       ),
     );

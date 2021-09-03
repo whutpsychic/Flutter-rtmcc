@@ -46,7 +46,6 @@ class _PageState extends State<LoadingButtons> {
         Container(
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           child: Button(
-            filled: true,
             loading: _loading1,
             size: Size(100, 36),
             child: Text('加载按钮1'),
@@ -59,6 +58,7 @@ class _PageState extends State<LoadingButtons> {
         Container(
           margin: EdgeInsets.only(right: 10, top: 5, bottom: 5),
           child: Button(
+            outlined: true,
             loading: _loading2,
             size: Size(100, 36),
             child: Text('加载按钮2'),

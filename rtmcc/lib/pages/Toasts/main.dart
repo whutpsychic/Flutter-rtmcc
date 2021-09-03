@@ -26,18 +26,12 @@ class _PageState extends State<Toasts> {
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
-            BlockButton(
-                filled: true, child: Text('一般短提示'), onPressed: _onPress),
-            BlockButton(
-                filled: true, child: Text('滞留时间长一点的提示'), onPressed: _onPress1),
-            BlockButton(
-                filled: true, child: Text('在中部显示'), onPressed: _onPress2),
-            BlockButton(
-                filled: true, child: Text('在上方显示'), onPressed: _onPress3),
-            BlockButton(
-                filled: true, child: Text('自定义位置显示'), onPressed: _onPress4),
-            BlockButton(
-                filled: true, child: Text('自定义样式'), onPressed: _onPress5),
+            BlockButton(child: Text('一般短提示'), onPressed: _onPress),
+            BlockButton(child: Text('滞留时间长一点的提示'), onPressed: _onPress1),
+            BlockButton(child: Text('在中部显示'), onPressed: _onPress2),
+            BlockButton(child: Text('在上方显示'), onPressed: _onPress3),
+            BlockButton(child: Text('自定义位置显示'), onPressed: _onPress4),
+            BlockButton(child: Text('自定义样式'), onPressed: _onPress5),
           ],
         ),
       ),

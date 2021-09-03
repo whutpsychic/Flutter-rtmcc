@@ -1,12 +1,18 @@
+// 请一次性选择完毕
+// 选择的照片一次性完全覆盖
+// 拍摄的照片可以不消失并手动可删除
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import './FormItem.dart';
+import '../../UI/ActionSheet/main.dart';
 
 // 单次最多上传9张图片
 const int maxNumber = 9;
 // 缝隙宽度
-const int w = 12;
+const int w = 0;
+// 左上角删除小标大小
+const double ds = 24;
 
 class FormPicturePicker extends StatefulWidget {
   final Key? key;
@@ -27,7 +33,8 @@ class FormPicturePicker extends StatefulWidget {
 
 class FormPicturePickerState extends State<FormPicturePicker> {
   String? _errText;
-  List<XFile>? _imageFileList;
+  List<XFile> _imageFileList = [];
+  List<XFile> _tokenFileList = [];
   dynamic _pickImageError;
   final ImagePicker _picker = ImagePicker();
 
@@ -38,13 +45,29 @@ class FormPicturePickerState extends State<FormPicturePicker> {
 
   void picking() async {
     try {
-      final pickedFileList = await _picker.pickMultiImage(
+      final List<XFile>? pickedFileList = await _picker.pickMultiImage(
         maxWidth: 100,
         maxHeight: 100,
-        // imageQuality: quality,
       );
       setState(() {
-        _imageFileList = pickedFileList;
+        _imageFileList = pickedFileList!;
+      });
+    } catch (e) {
+      setState(() {
+        _pickImageError = e;
+      });
+    }
+  }
+
+  void taking() async {
+    try {
+      final XFile? pickedFileList = await _picker.pickImage(
+        source: ImageSource.camera,
+        maxWidth: 100,
+        maxHeight: 100,
+      );
+      setState(() {
+        _tokenFileList = [..._tokenFileList, pickedFileList!];
       });
     } catch (e) {
       setState(() {
@@ -55,13 +78,6 @@ class FormPicturePickerState extends State<FormPicturePicker> {
 
   // 快捷校验，不可为空
   bool _validate() {
-    // if (_currTime == null) {
-    //   error("您必须选择${widget.label}!");
-    //   return false;
-    // } else {
-    //   validateSuccess();
-    //   return true;
-    // }
     return true;
   }
 
@@ -98,20 +114,11 @@ class FormPicturePickerState extends State<FormPicturePicker> {
       errText: _errText,
       extend: true,
       child: Container(
-        // color: Colors.orange,
         margin: EdgeInsets.symmetric(vertical: 10),
         child: Wrap(
           children: [
             ..._renderImgs(_size),
             _renderAddPic(_size),
-            // AddPic(size: _size, onAdd: _onAddPicture),
-            // AddPic(size: _size, onAdd: _onAddPicture),
-            // AddPic(size: _size, onAdd: _onAddPicture),
-            // AddPic(size: _size, onAdd: _onAddPicture),
-            // AddPic(size: _size, onAdd: _onAddPicture),
-            // AddPic(size: _size, onAdd: _onAddPicture),
-            // AddPic(size: _size, onAdd: _onAddPicture),
-            // AddPic(size: _size, onAdd: _onAddPicture),
           ],
         ),
       ),
@@ -119,34 +126,45 @@ class FormPicturePickerState extends State<FormPicturePicker> {
   }
 
   _renderImgs(s) {
-    if (_imageFileList != null) {
-      List<Widget> arr = [];
-      _imageFileList!.forEach((el) {
-        Widget imgItem = Container(
-          width: s,
-          height: s,
-          margin: EdgeInsets.all(w / 2),
-          decoration:
-              BoxDecoration(border: Border.all(width: 1, color: Colors.grey)),
-          child: Image.file(File(el.path)),
-        );
-        arr.add(imgItem);
-      });
+    List<Widget> arr = [];
+    _imageFileList.forEach((el) {
+      arr.add(PicItem(size: s, path: el.path, onDelete: _deleteIt));
+    });
+    _tokenFileList.forEach((el) {
+      arr.add(PicItem(size: s, path: el.path, onDelete: _deleteIt));
+    });
+    return arr;
+  }
 
-      return arr;
-    }
-    return [];
+  _deleteIt(path) {
+    var it =
+        _imageFileList.where((element) => element.path == path).toList()[0];
+
+    setState(() {
+      _imageFileList.remove(it);
+    });
   }
 
   _renderAddPic(s) {
     // 尚未满最大数量
-    if (_imageFileList != null && _imageFileList!.length >= maxNumber) {
+    if (_imageFileList.length >= maxNumber) {
       return Container();
     }
     return AddPic(size: s, onAdd: _onAddPicture);
   }
 
   _onAddPicture() {
+    ActionSheet.of(context)
+        .show(items: ["拍摄", "选择照片"], actions: [_gotoTakePhoto, _gotoAlbum]);
+  }
+
+  // 准备拍摄照片
+  _gotoTakePhoto() {
+    taking();
+  }
+
+  // 到相册里去选择
+  _gotoAlbum() {
     picking();
   }
 
@@ -157,6 +175,58 @@ class FormPicturePickerState extends State<FormPicturePicker> {
   }
 }
 
+class PicItem extends StatelessWidget {
+  final double size;
+  final String path;
+  final Function(String path) onDelete;
+  PicItem({required this.size, required this.path, required this.onDelete});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        width: size,
+        height: size,
+        margin: EdgeInsets.all(w / 2),
+        child: Container(
+          child: Stack(
+            children: [
+              Positioned(
+                top: ds / 2,
+                left: ds / 2,
+                child: Container(
+                  width: size - ds,
+                  height: size - ds,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Colors.grey)),
+                  child: Image.file(File(path)),
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                child: GestureDetector(
+                  onTap: () {
+                    onDelete(path);
+                  },
+                  child: Container(
+                    width: ds,
+                    height: ds,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(ds / 2),
+                    ),
+                    child: Icon(Icons.delete_outline,
+                        color: Colors.white, size: ds - 6),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
 class AddPic extends StatelessWidget {
   final double size;
   final Function() onAdd;
@@ -164,15 +234,20 @@ class AddPic extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onAdd,
-      child: Container(
-        margin: EdgeInsets.all(w / 2),
-        width: size,
-        height: size,
-        decoration:
-            BoxDecoration(border: Border.all(width: 1, color: Colors.grey)),
-        child: Icon(Icons.add_a_photo_outlined),
+    return Container(
+      width: size,
+      height: size,
+      alignment: Alignment.center,
+      child: GestureDetector(
+        onTap: onAdd,
+        child: Container(
+          margin: EdgeInsets.all(w / 2),
+          width: size - ds,
+          height: size - ds,
+          decoration:
+              BoxDecoration(border: Border.all(width: 1, color: Colors.grey)),
+          child: Icon(Icons.add_a_photo_outlined),
+        ),
       ),
     );
   }
