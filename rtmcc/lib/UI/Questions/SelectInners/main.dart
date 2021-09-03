@@ -51,33 +51,28 @@ class SelectInnersState extends State<SelectInners> {
   }
 
   getValue() {
-    return _arrangeIndex(selected);
-  }
-
-  // 将答案排序
-  _arrangeIndex(arr) {
-    List _arr = [...arr];
-    int mySortComparison(a, b) {
-      if (a < b) {
-        return -1;
-      } else if (a > b) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }
-
-    _arr.sort(mySortComparison);
-    return _arr;
+    return selected;
   }
 
   _renderAnswers() {
+    double _sw = MediaQuery.of(context).size.width;
     int num = 0;
     return _answers.map((el) {
       int ik = num++;
       return Container(
         child: Column(children: [
-          Text("(${ik + 1})"),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text("（ ${ik + 1} ）"),
+              Container(
+                width: _sw - 80,
+                height: 1,
+                margin: EdgeInsets.symmetric(vertical: 24),
+                color: Colors.grey[300],
+              )
+            ],
+          ),
           ...el.map<Widget>((e) {
             int i = el.indexOf(e);
             return SelectItem(

@@ -40,7 +40,7 @@ Designed by zbc
 
 4.输入型填空题
 认为填空题题干就是一个字符串，其空出位置应由录题时自行添加。
-题型最小模型数据：{question<String>: "xxxx"}
+题型最小模型数据：{question<String>: "xxxx",blanks<int> x}
 题型答案输出最小模型数据{answer<List<String>>: [x,x,x]}
 
 5.判断题

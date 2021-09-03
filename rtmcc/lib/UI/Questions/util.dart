@@ -8,8 +8,16 @@ class SelectItem extends StatelessWidget {
   final int value;
   final bool? active;
   final Function(int v)? onTap;
-  SelectItem(
-      {required this.text, required this.value, this.active, this.onTap});
+  final Size? size;
+  final Widget? child;
+  SelectItem({
+    required this.text,
+    required this.value,
+    this.active,
+    this.onTap,
+    this.size,
+    this.child,
+  });
 
   @override
   build(BuildContext context) {
@@ -20,7 +28,8 @@ class SelectItem extends StatelessWidget {
         if (onTap != null) onTap!(value);
       },
       child: Container(
-        width: _screenWidth,
+        width: size != null ? size!.width : _screenWidth,
+        height: size != null ? size!.height : null,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         margin: EdgeInsets.only(bottom: 16),
         decoration: BoxDecoration(
@@ -28,7 +37,7 @@ class SelectItem extends StatelessWidget {
           border: Border.all(width: 1, color: colorStyle[1]),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Text(text),
+        child: child != null ? child : Text(text),
       ),
     );
   }

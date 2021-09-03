@@ -36,7 +36,7 @@ class _PageState extends State<AllMenu> with MyPage {
           ListGroup(
             title: "考试答题组件",
             children: [
-              MenuItem("模拟考试", "/examing"),
+              MenuItem("模拟考试", "/examing", {"total": 6}),
             ],
           ),
         ],
@@ -48,14 +48,15 @@ class _PageState extends State<AllMenu> with MyPage {
 class MenuItem extends StatelessWidget {
   final String title;
   final String url;
-  MenuItem(this.title, this.url);
+  final Map? args;
+  MenuItem(this.title, this.url, [this.args]);
   @override
   Widget build(BuildContext context) {
     return ListItem(
         title: title,
         arrow: true,
         onTap: () {
-          Navigator.of(context).pushNamed(url);
+          Navigator.of(context).pushNamed(url, arguments: args);
         });
   }
 }

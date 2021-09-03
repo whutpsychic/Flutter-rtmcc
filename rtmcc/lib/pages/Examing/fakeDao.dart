@@ -1,7 +1,15 @@
 import 'dart:async';
 import '../../static/questions.dart';
 
-const questions = [q_selectSingle, q_selectMulti, q_selectBlank];
+const questions = [
+  // q_sort,
+  q_selectSingle,
+  q_selectMulti,
+  q_selectBlank,
+  q_fillInBlank,
+  q_judgement,
+  q_shortAnswer,
+];
 
 class Dao {
   // 模拟取得下一题
