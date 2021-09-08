@@ -31,6 +31,9 @@ class _PageState extends State<AllMenu> with MyPage {
               MenuItem("列表", "/list-items"),
               MenuItem("选择器视图", "/select-views"),
               MenuItem("表单", "/form-items"),
+              MenuItem("折叠面板", "/collapse-items"),
+              MenuItem("图片轮播", "/carousel"),
+              MenuItem("下拉刷新", "/pull-to-refresh"),
             ],
           ),
           ListGroup(

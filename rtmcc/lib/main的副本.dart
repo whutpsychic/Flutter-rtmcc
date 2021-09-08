@@ -44,7 +44,6 @@ class MyAppState extends State<MyApp> {
         ),
         initialRoute: _generateDefaultRoute(),
         routes: {
-          '/carousel-overview': (context) => CarouselOverview(),
           '/all-menu': (context) => AllMenu(),
           '/buttons': (context) => Buttons(),
           '/toasts': (context) => Toasts(),
@@ -57,7 +56,7 @@ class MyAppState extends State<MyApp> {
           '/exam-complete': (context) => ExamComplete(),
           '/collapse-items': (context) => CollapseItems(),
           '/carousel': (context) => CarouselPage(),
-          '/pull-to-refresh': (context) => PullToRefresh()
+          '/carousel-overview': (context) => CarouselOverview()
         },
       ),
     );

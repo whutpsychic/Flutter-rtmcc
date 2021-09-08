@@ -5,10 +5,10 @@ import '../../UI/Button/main.dart';
 
 class ExamComplete extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _ExamCompleteState();
+  State<StatefulWidget> createState() => _PageState();
 }
 
-class _ExamCompleteState extends State<ExamComplete> with MyPage {
+class _PageState extends State<ExamComplete> with MyPage {
   // 计时器
   Timer? tc;
   // 还剩几秒
