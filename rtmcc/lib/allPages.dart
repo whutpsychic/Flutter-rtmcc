@@ -12,3 +12,7 @@ export "./pages/ExamComplete/main.dart";
 export "./pages/CollapseItems/main.dart";
 export "./pages/Carousel/main.dart";
 export "./pages/PullToRefresh/main.dart";
+export "./pages/Charts/main.dart";
+export "./pages/Charts/BarChart.dart";
+export "./pages/Charts/LineChart.dart";
+export "./pages/Charts/PieChart.dart";

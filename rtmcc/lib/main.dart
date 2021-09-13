@@ -57,7 +57,11 @@ class MyAppState extends State<MyApp> {
           '/exam-complete': (context) => ExamComplete(),
           '/collapse-items': (context) => CollapseItems(),
           '/carousel': (context) => CarouselPage(),
-          '/pull-to-refresh': (context) => PullToRefresh()
+          '/pull-to-refresh': (context) => PullToRefreshPage(),
+          '/all-charts': (context) => Charts(),
+          '/bar-chart': (context) => BarChart(),
+          '/line-chart': (context) => LineChart(),
+          '/pie-chart': (context) => PieChart(),
         },
       ),
     );

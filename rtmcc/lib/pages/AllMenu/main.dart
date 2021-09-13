@@ -37,6 +37,12 @@ class _PageState extends State<AllMenu> with MyPage {
             ],
           ),
           ListGroup(
+            title: "UI组件",
+            children: [
+              MenuItem("图表", "/all-charts"),
+            ],
+          ),
+          ListGroup(
             title: "考试答题组件",
             children: [
               MenuItem("模拟考试", "/examing", {"total": 6}),
