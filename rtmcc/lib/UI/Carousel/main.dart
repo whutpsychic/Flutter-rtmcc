@@ -8,11 +8,13 @@ List<Color> colors = [Colors.grey[400]!, Colors.grey[600]!];
 
 class Carousel extends StatefulWidget {
   final List<String> data;
+  final Function(dynamic it, int index)? onTap;
   final bool? enlargeCenterPage;
   final Axis? direction;
   final bool? autoPlay;
   Carousel({
     required this.data,
+    this.onTap,
     this.enlargeCenterPage,
     this.direction,
     this.autoPlay,
@@ -122,36 +124,41 @@ class CarouselState extends State<Carousel> {
                   viewportFraction: _enlargeCenterPage ? 0.8 : 1.0,
                   onPageChanged: _onPageChanged,
                 ),
-                items: widget.data
-                    .map((item) => Container(
-                          child: Center(
-                            child: Image.network(
-                              item,
-                              width: 2000,
-                              fit: BoxFit.cover,
-                              loadingBuilder: (BuildContext context,
-                                  Widget child,
-                                  ImageChunkEvent? loadingProgress) {
-                                if (loadingProgress == null) {
-                                  return child;
-                                }
-                                return Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text("加载中..."),
-                                      Text(
-                                          "${loadingProgress.expectedTotalBytes != null ? ((loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!) * 100).toStringAsFixed(0) : 0}%")
-                                    ],
-                                  ),
-                                );
-                              },
-                              errorBuilder: (ctx, ex, st) =>
-                                  Container(child: Text("图片加载失败")),
-                            ),
-                          ),
-                        ))
-                    .toList(),
+                items: widget.data.map((item) {
+                  int i = widget.data.indexOf(item);
+                  return GestureDetector(
+                    onTap: () {
+                      if (widget.onTap != null) widget.onTap!(item, i);
+                    },
+                    child: Container(
+                      child: Center(
+                        child: Image.network(
+                          item,
+                          width: 2000,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            }
+                            return Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("加载中..."),
+                                  Text(
+                                      "${loadingProgress.expectedTotalBytes != null ? ((loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!) * 100).toStringAsFixed(0) : 0}%")
+                                ],
+                              ),
+                            );
+                          },
+                          errorBuilder: (ctx, ex, st) =>
+                              Container(child: Text("图片加载失败")),
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
               _enlargeCenterPage ? Container() : _renderInnerRadios()
             ],

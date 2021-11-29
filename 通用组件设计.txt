@@ -26,7 +26,9 @@ PullToRefresh 下拉刷新
 8.预留key调用方法：key.endLoadMore 主动控制使其加载更多完毕
 9.认为10秒后，无论是刷新还是加载更多都会超时
 
-
+PhotoViewer 图片浏览器
+1.Hero组件模式的单击切换全屏预览
+2.双指缩放
 
 
 

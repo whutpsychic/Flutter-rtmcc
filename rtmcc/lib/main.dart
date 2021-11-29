@@ -1,6 +1,11 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import './UI/Photo/main.dart';
+
 import './allPages.dart';
+import './core/Util/main.dart';
+import './config.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,7 +25,7 @@ class MyAppState extends State<MyApp> {
   // 有5分之一的概率会随到概览跑马灯页面
   String _generateDefaultRoute() {
     int r = Random().nextInt(100);
-    if (r <= 20) return "/carousel-overview";
+    if (r <= 20 && !Config.debug) return "/carousel-overview";
     return "/all-menu";
   }
 
@@ -29,6 +34,7 @@ class MyAppState extends State<MyApp> {
     return GestureDetector(
       onTap: () {},
       child: MaterialApp(
+        navigatorObservers: <NavigatorObserver>[routeObserver],
         title: 'Flutter Demo',
         theme: ThemeData(
           // This is the theme of your application.
@@ -42,8 +48,23 @@ class MyAppState extends State<MyApp> {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case '/pv':
+              return PageTransition(
+                child: PhotoViewer(),
+                type: PageTransitionType.fade,
+                settings: settings,
+                reverseDuration: Duration(milliseconds: 100),
+              );
+            default:
+              return null;
+          }
+        },
         initialRoute: _generateDefaultRoute(),
         routes: {
+          // '/pv': (context) => PhotoViewer(),
+          // --------------- common ---------------
           '/carousel-overview': (context) => CarouselOverview(),
           '/all-menu': (context) => AllMenu(),
           '/buttons': (context) => Buttons(),
@@ -53,8 +74,6 @@ class MyAppState extends State<MyApp> {
           '/list-items': (context) => ListItems(),
           '/select-views': (context) => SelectViews(),
           '/form-items': (context) => FormItems(),
-          '/examing': (context) => Examing(),
-          '/exam-complete': (context) => ExamComplete(),
           '/collapse-items': (context) => CollapseItems(),
           '/carousel': (context) => CarouselPage(),
           '/pull-to-refresh': (context) => PullToRefreshPage(),
@@ -62,6 +81,11 @@ class MyAppState extends State<MyApp> {
           '/bar-chart': (context) => BarChart(),
           '/line-chart': (context) => LineChart(),
           '/pie-chart': (context) => PieChart(),
+          // --------------- v1.2.0 ---------------
+          '/scanning': (context) => Scanning(),
+          '/scan-result': (context) => ScanResult(),
+          '/photo-view': (context) => PhotoView(),
+          '/album': (context) => Album(),
         },
       ),
     );

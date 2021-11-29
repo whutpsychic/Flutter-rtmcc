@@ -1,0 +1,20 @@
+本文档参照江铜规划文档列出了所有未来必然发生的终端需求，技术探路并总结
+
+1.内嵌 web 与 flutter 互通信息
+ - web 向 flutter 传送信息（要求 flutter 可以正常监听）
+ - web 直接调起 flutter 方法
+ - flutter 向 web 传送信息（要求 web 可以正常监听）
+ - flutter 直接调起 web 端功能
+2.flutter 调用原生功能模块
+ - 拍照
+ - 录像
+ - 扫码
+ - 定位
+ - 拨打电话
+ - 录音
+ - 
+
+
+
+
+

@@ -19,36 +19,43 @@ class _PageState extends State<AllMenu> with MyPage {
   Widget build(BuildContext context) {
     return MyScaffold(
       title: "菜单",
-      child: Column(
-        children: [
-          ListGroup(
-            title: "通用组件",
+      child: Container(
+        margin: EdgeInsets.only(bottom: 30),
+        child: SingleChildScrollView(
+          child: Column(
             children: [
-              MenuItem("按钮", "/buttons"),
-              MenuItem("提示", "/toasts"),
-              MenuItem("对话框", "/dialogs"),
-              MenuItem("操作表", "/actionsheets"),
-              MenuItem("列表", "/list-items"),
-              MenuItem("选择器视图", "/select-views"),
-              MenuItem("表单", "/form-items"),
-              MenuItem("折叠面板", "/collapse-items"),
-              MenuItem("图片轮播", "/carousel"),
-              MenuItem("下拉刷新", "/pull-to-refresh"),
+              ListGroup(
+                title: "通用组件",
+                children: [
+                  MenuItem("按钮", "/buttons"),
+                  MenuItem("提示", "/toasts"),
+                  MenuItem("对话框", "/dialogs"),
+                  MenuItem("操作表", "/actionsheets"),
+                  MenuItem("列表", "/list-items"),
+                  MenuItem("选择器视图", "/select-views"),
+                  MenuItem("表单", "/form-items"),
+                  MenuItem("折叠面板", "/collapse-items"),
+                  MenuItem("图片轮播", "/carousel"),
+                  MenuItem("下拉刷新", "/pull-to-refresh"),
+                ],
+              ),
+              ListGroup(
+                title: "UI组件",
+                children: [
+                  MenuItem("图表", "/all-charts"),
+                ],
+              ),
+              ListGroup(
+                title: "功能组件",
+                children: [
+                  MenuItem("扫码", "/scanning"),
+                  MenuItem("图片查看器", "/photo-view"),
+                  MenuItem("访问相册", "/album"),
+                ],
+              ),
             ],
           ),
-          ListGroup(
-            title: "UI组件",
-            children: [
-              MenuItem("图表", "/all-charts"),
-            ],
-          ),
-          ListGroup(
-            title: "考试答题组件",
-            children: [
-              MenuItem("模拟考试", "/examing", {"total": 6}),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }
