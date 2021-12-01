@@ -55,7 +55,7 @@ class MyAppState extends State<MyApp> {
                 child: PhotoViewer(),
                 type: PageTransitionType.fade,
                 settings: settings,
-                reverseDuration: Duration(milliseconds: 100),
+                reverseDuration: Duration(milliseconds: 400),
               );
             default:
               return null;
@@ -63,7 +63,7 @@ class MyAppState extends State<MyApp> {
         },
         initialRoute: _generateDefaultRoute(),
         routes: {
-          // '/pv': (context) => PhotoViewer(),
+          // '/pv': (context) => PhotoViewer2(),
           // --------------- common ---------------
           '/carousel-overview': (context) => CarouselOverview(),
           '/all-menu': (context) => AllMenu(),

@@ -99,6 +99,44 @@ class Dialog {
         });
   }
 
+  void choose(String title, String content,
+      {List<String?> btns = const [], List<Function()?> funs = const []}) {
+    Function() f1 = funs.length > 0 && funs[0] != null ? funs[0]! : () {};
+    Function() f2 = funs.length > 1 && funs[1] != null ? funs[1]! : () {};
+
+    String btn1Text = btns.length > 0 ? btns[0]! : "";
+    String btn2Text = btns.length > 1 ? btns[1]! : "";
+
+    showCupertinoDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return CupertinoAlertDialog(
+            title: Text(title),
+            content: Container(
+              child: Text(content),
+            ),
+            actions: [
+              // The "No" button
+              CupertinoDialogAction(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  f1();
+                },
+                child: Text(btn1Text),
+              ),
+              // The "Yes" button
+              CupertinoDialogAction(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  f2();
+                },
+                child: Text(btn2Text),
+              ),
+            ],
+          );
+        });
+  }
+
   void input(String title, String content, Function? fun1, [Function? fun2]) {
     TextEditingController _controller = TextEditingController();
     Function f1 = fun1 ?? () {};

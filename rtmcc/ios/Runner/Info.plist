@@ -32,6 +32,7 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	
 	<key>NSCameraUsageDescription</key>
 	<string>请确保开启此权限之后再行拍摄照片</string>
 	<key>io.flutter.embedded_views_preview</key>
@@ -40,6 +41,7 @@
 	<string>请确保开启此权限之后才可以使用麦克风</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>请确保开启此权限之后再行选择照片</string>
+
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

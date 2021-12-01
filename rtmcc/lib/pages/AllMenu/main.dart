@@ -51,6 +51,7 @@ class _PageState extends State<AllMenu> with MyPage {
                   MenuItem("扫码", "/scanning"),
                   MenuItem("图片查看器", "/photo-view"),
                   MenuItem("访问相册", "/album"),
+                  MenuItem("视频播放", "/video"),
                 ],
               ),
             ],

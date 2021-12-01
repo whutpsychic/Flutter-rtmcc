@@ -24,23 +24,23 @@ class _PageState extends State<PhotoView> {
             url: "assets/1.jpeg",
             child: Image.asset("assets/1.jpeg", width: 200),
           ),
-          // Photo(
-          //   type: "asset",
-          //   url: "assets/2.jpeg",
-          //   child: Image.asset("assets/2.jpeg", width: 300),
-          // ),
-          // Photo(
-          //   type: "asset",
-          //   url: "assets/3.jpeg",
-          //   child: Image.asset("assets/3.jpeg", width: 300),
-          // ),
+          Photo(
+            type: "asset",
+            url: "assets/2.jpeg",
+            child: Image.asset("assets/2.jpeg", width: 300),
+          ),
+          Photo(
+            type: "asset",
+            url: "assets/3.jpeg",
+            child: Image.asset("assets/3.jpeg", width: 300),
+          ),
         ]),
       ),
     );
   }
 
   _go(String url) {
-    Navigator.of(context)
-        .pushNamed("/pv", arguments: {"type": "asset", "url": url});
+    Navigator.of(context).pushNamed("/pv",
+        arguments: {"type": "asset", "url": url, "key": "ass"});
   }
 }

@@ -29,16 +29,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   fluttertoast: ^8.0.8
   image_picker: ^0.8.3+3
-  # video_player: ^2.1.14
   url_launcher: ^6.0.9
   carousel_slider: ^4.0.0
   pull_to_refresh: ^2.0.0
   fl_chart: ^0.40.0
 
   scan: ^1.4.3
-  permission_handler: ^8.2.5
+  permission_handler: ^8.3.0
   page_transition: "^2.0.4"
   pinch_zoom: ^1.0.0
+  # video_player: ^2.2.7
 
 dev_dependencies:
   flutter_test:
