@@ -21,3 +21,4 @@ export "./pages/Scanning/main.dart";
 export "./pages/ScanResult/main.dart";
 export "./pages/PhotoView/main.dart";
 export "./pages/Album/main.dart";
+export "./pages/VideoPage/main.dart";

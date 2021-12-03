@@ -38,7 +38,7 @@ dependencies:
   permission_handler: ^8.3.0
   page_transition: "^2.0.4"
   pinch_zoom: ^1.0.0
-  # video_player: ^2.2.7
+  video_player: ^2.2.7
 
 dev_dependencies:
   flutter_test:

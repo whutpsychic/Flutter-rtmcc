@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import './UI/Photo/main.dart';
 
@@ -9,6 +10,9 @@ import './config.dart';
 
 void main() {
   runApp(MyApp());
+
+  // 强制竖屏
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }
 
 class MyApp extends StatefulWidget {
@@ -28,6 +32,8 @@ class MyAppState extends State<MyApp> {
     if (r <= 20 && !Config.debug) return "/carousel-overview";
     return "/all-menu";
   }
+
+  // 此app为强制竖屏，如遇需要横屏的页面，则需手动操作
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +92,7 @@ class MyAppState extends State<MyApp> {
           '/scan-result': (context) => ScanResult(),
           '/photo-view': (context) => PhotoView(),
           '/album': (context) => Album(),
+          '/video': (context) => VideoPage(),
         },
       ),
     );

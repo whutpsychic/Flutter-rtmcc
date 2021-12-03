@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+export './dataDecorations.dart';
 
 // 路径监听
 final RouteObserver<PageRoute> routeObserver = new RouteObserver<PageRoute>();
