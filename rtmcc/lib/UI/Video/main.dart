@@ -8,29 +8,31 @@ import './TimeStamp.dart';
 import './config.dart';
 
 // 等待多久后控制层消失
-const int timeout = 5;
+const int timeout = 8;
 
 // ----------- fixers -----------
 // 非全屏隔宽度
-const _nfsw = 180;
+const _nfsw = 200;
 // 全屏隔宽度
-const _fsw = 280;
+const _fsw = 300;
 
 class Video extends StatelessWidget {
+  final String? title;
   final String? url;
-  Video({required this.url});
+  Video({required this.url, this.title});
 
   @override
   Widget build(BuildContext context) {
-    return url != null ? VideoInner(url: url!) : Container();
+    return url != null ? VideoInner(url: url!, title: title) : Container();
   }
 }
 
 // -------------------------------------------
 
 class VideoInner extends StatefulWidget {
+  final String? title;
   final String url;
-  VideoInner({required this.url});
+  VideoInner({required this.url, this.title});
   @override
   _VideoState createState() => _VideoState();
 }
@@ -44,6 +46,8 @@ class _VideoState extends State<VideoInner> {
   Timer? _timeoutEvent;
 
   // states
+  // 正在缓冲
+  bool _loading = true;
   // 正在播放
   bool _playing = false;
   // 全屏模式
@@ -66,6 +70,7 @@ class _VideoState extends State<VideoInner> {
         setState(() {
           _rating = _r;
           _cs = _controller.value.position.inSeconds.toInt();
+          _loading = _controller.value.isBuffering;
         });
       })
       ..initialize().then((_) {
@@ -100,6 +105,14 @@ class _VideoState extends State<VideoInner> {
                   aspectRatio: _controller.value.aspectRatio,
                   child: GestureDetector(
                     onTap: _toggleShowControls,
+                    onDoubleTap: () {
+                      _commonOP(() {
+                        setState(() {
+                          _showControls = true;
+                        });
+                        _togglePlay();
+                      });
+                    },
                     child: Container(color: Colors.transparent, width: _w),
                   ),
                 ),
@@ -121,11 +134,11 @@ class _VideoState extends State<VideoInner> {
                                     IconBtn(Icons.arrow_back_ios_new,
                                         onTap: _fallBack, size: -4),
                                     Text(
-                                      "未知标题",
+                                      widget.title ?? "",
                                       style: TextStyle(
                                           fontSize: 16, color: styleColor),
                                     ),
-                                    IconBtn(Icons.more_horiz)
+                                    // IconBtn(Icons.more_horiz)
                                   ],
                                 ),
                               ),
@@ -177,6 +190,21 @@ class _VideoState extends State<VideoInner> {
                                 ),
                               )
                             ],
+                          ),
+                        ),
+                      )
+                    : Container(),
+                // 加载中提示
+                _loading
+                    ? Container(
+                        width: _w,
+                        child: AspectRatio(
+                          aspectRatio: _controller.value.aspectRatio,
+                          child: Center(
+                            child: Text(
+                              "正在缓冲...",
+                              style: TextStyle(color: styleColor, fontSize: 12),
+                            ),
                           ),
                         ),
                       )
